@@ -33,20 +33,15 @@ noncomputable def unilateralShiftAdjoint : (ℕ → ℂ) →L[ℂ] (ℕ → ℂ)
 
 /-- The spectrum of the unilateral shift S is the closed unit disk 𝔻̄ = {z : |z| ≤ 1}.
     This is in stark contrast to self-adjoint operators whose spectrum is real. -/
-example : True := by trivial
 
 /-- The point spectrum σₚ(S) = ∅ (no eigenvalues). -/
-example : True := by trivial
 
 /-- The residual spectrum σᵣ(S) = {z : |z| < 1} (the open unit disk). -/
-example : True := by trivial
 
 /-- The continuous spectrum σ_c(S) = {z : |z| = 1} (the unit circle). -/
-example : True := by trivial
 
 /-- S is not normal: S*S ≠ SS*. Indeed, S*S = I, SS* = I - P₀
     where P₀ is the projection onto e₀. -/
-example : True := by trivial
 
 end UnilateralShift
 
@@ -64,14 +59,11 @@ noncomputable def multiplicationOnCircle : (ℂ → ℂ) →L[ℂ] (ℂ → ℂ)
       map_smul' := by intro c f; ext z; simp [mul_assoc] }
 
 /-- M_z is normal: M_z* M_z = M_z M_z* = I. -/
-example : True := by trivial
 
 /-- σ(M_z) = 𝕋 (the unit circle). -/
-example : True := by trivial
 
 /-- The spectral theorem still applies: there exists a spectral measure E
     on ℂ (not ℝ) such that M_z = ∫ z dE(z). -/
-example : True := by trivial
 
 end NormalNotSelfAdjoint
 
@@ -92,7 +84,6 @@ noncomputable def jordanBlock (λ : ℂ) : (Fin 2 → ℂ) →L[ℂ] (Fin 2 → 
       map_smul' := by intro c f; ext i; fin_cases i <;> simp [mul_add] }
 
 /-- The spectrum is {λ}, but J is not normal (unless λ is special). -/
-example : True := by trivial
 
 end ComplexSpectrum
 

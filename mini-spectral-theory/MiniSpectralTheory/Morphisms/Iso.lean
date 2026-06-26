@@ -87,6 +87,5 @@ def sameMultiplicity {H₁ H₂ : Type _}
 #eval "Spectral measure isomorphisms module loaded"
 #eval "Defined: UnitaryEquivalence, multiplicity theory"
 
-example : True := by trivial
 
 end MiniSpectralTheory

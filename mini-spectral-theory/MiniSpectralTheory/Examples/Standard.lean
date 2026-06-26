@@ -26,7 +26,6 @@ noncomputable def multiplicationOperator : (ℂ → ℂ) →L[ℂ] (ℂ → ℂ)
       map_smul' := by intro c f; ext x; simp [mul_assoc] }
 
 /-- The spectrum of the multiplication operator is [0,1]. -/
-example : True := by trivial
 
 /-- The spectral measure of the multiplication operator is:
     (E(Δ)f)(x) = 1_Δ(x) · f(x). For any Borel Δ ⊆ [0,1],
@@ -53,7 +52,6 @@ noncomputable def multiplicationSpectralMeasure : SpectralMeasure (ℂ → ℂ) 
 
 /-- The functional calculus for the multiplication operator:
     f(M) is multiplication by f(x). -/
-example : True := by trivial
 
 end MultiplicationOperator
 
@@ -76,7 +74,6 @@ noncomputable def compactSelfAdjointExample : (ℕ → ℂ) →L[ℂ] (ℕ → �
 def compactEigenvalues : Set ℂ := {0} ∪ {1 / ((n : ℂ) + 1) | n : ℕ}
 
 /-- Each eigenvalue λₙ has multiplicity 1. -/
-example : True := by trivial
 
 /-- The spectral measure is discrete: E(Δ) = Σ_{λₙ ∈ Δ} Pₙ where Pₙ
     is the projection onto the n-th basis vector. -/

@@ -129,6 +129,5 @@ def simpleOperator : (Fin 2 → ℂ) →L[ℂ] (Fin 2 → ℂ) :=
 #eval "Operator defined"
 
 -- Spectral radius of identity is 1
-example : True := by trivial
 
 end MiniSpectralTheory

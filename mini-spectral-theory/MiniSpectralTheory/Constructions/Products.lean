@@ -72,6 +72,5 @@ end TensorProduct
 #eval "Defined: direct sum and tensor product of spectral measures"
 
 /-- Minimal working example: trivial direct sum. -/
-example : True := by trivial
 
 end MiniSpectralTheory

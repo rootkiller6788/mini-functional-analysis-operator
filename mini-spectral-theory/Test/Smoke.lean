@@ -21,7 +21,6 @@ def test_spectrum_exists : True := by
 #eval "Test 2: SpectralMeasure structure"
 
 -- Test 3: Resolvent set is complement of spectrum
-example : True := by trivial
 
 -- Test 4: Gelfand formula references
 #eval "Test 4: Gelfand formula r(T) = lim ‖T^n‖^(1/n)"

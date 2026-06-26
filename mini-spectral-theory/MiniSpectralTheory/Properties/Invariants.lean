@@ -83,6 +83,5 @@ noncomputable def singularContinuousSubspace (T : H →L[ℂ] H) (hT : IsSelfAdj
 #eval "Defined: essential/discrete/ac/sc spectrum, multiplicity function"
 
 -- Example of computing a simple essential spectrum
-example : True := by trivial
 
 end MiniSpectralTheory
