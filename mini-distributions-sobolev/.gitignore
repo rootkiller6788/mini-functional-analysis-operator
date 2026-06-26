@@ -1,0 +1,9 @@
+.lake/
+build/
+lake-packages/
+*.olean
+*.ilean
+*.trace
+.DS_Store
+__pycache__/
+*.pyc

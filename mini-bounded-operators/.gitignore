@@ -1,0 +1,14 @@
+# Lake build output
+build/
+.lake/
+lakefile.olean
+
+# Lean
+*.olean
+*.ilean
+*.hash
+*.trace
+
+# OS
+.DS_Store
+Thumbs.db

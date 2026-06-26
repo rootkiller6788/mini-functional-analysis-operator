@@ -1,0 +1,25 @@
+import MiniSpectralTheory.Core.Basic
+import MiniSpectralTheory.Core.Laws
+import MiniSpectralTheory.Core.Objects
+import MiniSpectralTheory.Morphisms.Hom
+import MiniSpectralTheory.Morphisms.Iso
+import MiniSpectralTheory.Morphisms.Equiv
+import MiniSpectralTheory.Constructions.Products
+import MiniSpectralTheory.Constructions.Quotients
+import MiniSpectralTheory.Constructions.Subobjects
+import MiniSpectralTheory.Constructions.Universal
+import MiniSpectralTheory.Properties.Invariants
+import MiniSpectralTheory.Properties.Preservation
+import MiniSpectralTheory.Properties.ClassificationData
+import MiniSpectralTheory.Theorems.Basic
+import MiniSpectralTheory.Theorems.Classification
+import MiniSpectralTheory.Theorems.Main
+import MiniSpectralTheory.Theorems.UniversalProperties
+import MiniSpectralTheory.Examples.Standard
+import MiniSpectralTheory.Examples.Counterexamples
+import MiniSpectralTheory.Bridges.ToAlgebra
+import MiniSpectralTheory.Bridges.ToTopology
+import MiniSpectralTheory.Bridges.ToGeometry
+import MiniSpectralTheory.Bridges.ToComputation
+
+#eval "MiniSpectralTheory library root — all 23 modules imported"
