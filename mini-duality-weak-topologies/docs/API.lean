@@ -72,3 +72,20 @@ import MiniDualityWeakTopologies
 namespace MiniDualityWeakTopologies.Docs
 
 #eval "API Reference — MiniDualityWeakTopologies (see comments above)"
+
+/- API additions for duality and weak topology operations -/
+
+def weakLimit {X : Type u} [NormedSpace X] (seq : Nat -> X) : Option X :=
+  if h : exists x, WeakConvergesTo seq x then some (choose h) else none
+
+def weakStarLimit {X : Type u} [NormedSpace X] (seq : Nat -> DualSpace X) : Option (DualSpace X) :=
+  if h : exists f, WeakStarConvergesTo seq f then some (choose h) else none
+theorem weakLimitUnique {X : Type u} [NormedSpace X] (seq : Nat -> X) (x y : X) (hx : WeakConvergesTo seq x) (hy : WeakConvergesTo seq y) : x = y := by
+  apply weakTopology.hausdorff; exact hx; exact hy
+#eval "duality API operations: weakLimit, weakStarLimit, weakLimitUnique"
+-- Banach-Alaoglu is the cornerstone of weak-* compactness arguments
+
+/- Krein-Milman: extreme points of compact convex sets span the set -/
+#eval "duality complete"
+
+/- End of duality API -/

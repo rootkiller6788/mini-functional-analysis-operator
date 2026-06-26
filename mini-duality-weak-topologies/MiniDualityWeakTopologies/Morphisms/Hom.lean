@@ -84,3 +84,36 @@ def preAnnihilator {X : Type _} [NormedAddCommGroup X] [NormedSpace ℝ X]
   {x : X | ∀ f ∈ N, f x = 0}
 
 #eval "Morphisms.Hom — transpose, weaklyContinuous, weaklyStarContinuous, annihilator, preAnnihilator"
+
+/-! ## Weak-to-Weak Continuity
+
+A linear operator T : X -> Y is continuous in the weak topologies
+iff it is continuous in norm (i.e., bounded). Weak-to-weak continuity
+coincides with norm continuity for linear maps between normed spaces.
+-/
+
+theorem weak_continuous_iff_bounded (X Y : Type u) [NormedSpace X] [NormedSpace Y]
+    (T : LinearMap X Y) :
+    IsContinuous (weakTopology X) (weakTopology Y) T <-> IsBounded T := by
+  -- (->) If T is weakly continuous, its graph is weakly closed, hence norm closed
+  -- => by Closed Graph Theorem, T is bounded
+  -- (<-) If T is bounded, for any weakly open V = f^{-1}(U), T^{-1}(V) = (f o T)^{-1}(U)
+  -- and f o T in X* => T^{-1}(V) is weakly open
+  sorry
+
+/-! ## Compact Operators and Weak Convergence
+
+A bounded operator T is compact iff it maps weakly convergent
+sequences to norm-convergent sequences.
+-/
+
+theorem compact_iff_weak_to_norm_seq (X Y : Type u) [BanachSpace X] [BanachSpace Y]
+    (T : BoundedLinearOperator X Y) :
+    IsCompact T <-> (forall (seq : Nat -> X) (x : X), WeakConvergesTo seq x ->
+      NormConvergesTo (fun n => T (seq n)) (T x)) := by
+  -- (->) Compact operators map weakly convergent to norm convergent
+  -- (<-) If ||T x_n|| stays away from 0 while x_n -> 0 weakly, use the
+  -- Eberlein-Smulian construction to get a contradiction with compactness
+  sorry
+
+#eval "Weak continuity + compact = weak-to-norm"

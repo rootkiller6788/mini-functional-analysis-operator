@@ -87,3 +87,51 @@ theorem singularValues_asEigenvalues {H : Type u}
 #eval "singularValues_asEigenvalues: s_n(T) = λ_n(|T|)"
 
 end MiniCompactOperators
+
+/-! ## Hilbert-Schmidt Operators
+
+An operator T on L^2 is Hilbert-Schmidt if sum_n ||T e_n||^2 < inf
+for some (equivalently any) orthonormal basis {e_n}.
+Hilbert-Schmidt operators form a Hilbert space with inner product
+<S,T>_HS = trace(S* T).
+-/
+
+structure HilbertSchmidtOperator (H : Type u) [HilbertSpace H] where
+  operator : BoundedLinearOperator H H
+  isHS : exists (basis : ℕ -> H), IsOrthonormal basis /\
+    sum (fun n => (HilbertSpace.norm (operator (basis n)))^2) < infinity
+
+/-! ## Trace-Class Operators
+
+T is trace-class if sum_n <|T| e_n, e_n> < inf for some orthonormal basis.
+Trace-class operators are compact and have a well-defined trace.
+Tr(T) = sum_n <T e_n, e_n> is independent of the basis.
+-/
+
+structure TraceClassOperator (H : Type u) [HilbertSpace H] where
+  operator : BoundedLinearOperator H H
+  isTraceClass : exists (basis : ℕ -> H), IsOrthonormal basis /\
+    sum (fun n => HilbertSpace.inner (abs operator (basis n)) (basis n)) < infinity
+
+theorem trace_independent_of_basis (H : Type u) [HilbertSpace H]
+    (T : TraceClassOperator H) (basis1 basis2 : ℕ -> H)
+    (h1 : IsOrthonormal basis1) (h2 : IsOrthonormal basis2) :
+    sum (fun n => HilbertSpace.inner (T.operator (basis1 n)) (basis1 n)) =
+    sum (fun n => HilbertSpace.inner (T.operator (basis2 n)) (basis2 n)) := by
+  sorry
+
+/-! ## Nuclear Operators on Banach Spaces
+
+T : X -> Y is nuclear if T = sum_n lambda_n x_n* cross y_n with
+sum |lambda_n| < inf and ||x_n*|| <= 1, ||y_n|| <= 1.
+Every nuclear operator is compact.
+-/
+
+theorem nuclear_implies_compact {X Y : Type u} [NormedAddCommGroup X] [NormedAddCommGroup Y]
+    [CompleteSpace X] [CompleteSpace Y] (T : NuclearOperator X Y) :
+    CompactOperator X Y := by
+  -- Nuclear = limit of finite rank operators in nuclear norm
+  -- Finite rank => compact; nuclear norm limit preserves compactness
+  sorry
+
+#eval "Hilbert-Schmidt + Trace-class + Nuclear operators"

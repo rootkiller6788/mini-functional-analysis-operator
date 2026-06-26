@@ -79,3 +79,33 @@ def indexPairing (st : SpectralTriple) : ℤ :=
   0
 
 #eval "Bridges.ToGeometry: DiracOperator, AtiyahSinger, SpectralTriple, IndexPairing — loaded"
+
+/-! ## Laplacian on Manifolds
+
+The Laplace-Beltrami operator on a complete Riemannian manifold
+is essentially self-adjoint on C_c^inf(M). Its spectrum encodes
+the geometry of M (hearing the shape of a drum).
+-/
+
+theorem laplacian_essentially_self_adjoint (M : Type u) [RiemannianManifold M]
+    (h_complete : IsComplete M) : IsEssentiallySelfAdjoint (laplaceBeltrami M) := by
+  -- Chernoff's essential self-adjointness criterion: if range(T +/- iI) is dense
+  -- For Laplacian, use integration by parts and elliptic regularity
+  sorry
+
+/-! ## Dirac Operator
+
+The Dirac operator on a spin manifold is an unbounded self-adjoint
+operator whose square is the Laplacian plus curvature terms
+(Lichnerowicz formula: D^2 = nabla* nabla + R/4).
+-/
+
+theorem lichnerowicz_formula (M : Type u) [SpinManifold M] :
+    (diracOperator M)^2 = connectionLaplacian M + (scalarCurvature M / 4) * I := by
+  -- Compute D^2 using Clifford algebra relations
+  -- D^2 = sum_{i,j} gamma^i gamma^j nabla_i nabla_j
+  -- Antisymmetrize: gamma^i gamma^j + gamma^j gamma^i = -2 g^{ij}
+  -- Curvature term from [nabla_i, nabla_j] = R_{ij}
+  sorry
+
+#eval "Laplacian + Dirac operator on manifolds"

@@ -67,3 +67,19 @@ theorem indexBoundaryMap {H : Type u}
 #eval "indexBoundaryMap: Fredholm index = K-theory boundary map"
 
 end MiniCompactOperators
+
+/-! ## Direct Sum of Compact Operators
+
+The direct sum T1 (+) T2 is compact on X1 (+) X2 iff T1 and T2 are compact.
+-/
+
+theorem direct_sum_compact_iff {X1 X2 Y1 Y2 : Type u} [NormedAddCommGroup X1] [NormedAddCommGroup X2]
+    [NormedAddCommGroup Y1] [NormedAddCommGroup Y2] [CompleteSpace X1] [CompleteSpace X2]
+    [CompleteSpace Y1] [CompleteSpace Y2] (T1 : BoundedLinearOperator X1 Y1)
+    (T2 : BoundedLinearOperator X2 Y2) :
+    CompactOperator (X1 (+) X2) (Y1 (+) Y2) (T1 (+) T2) <-> 
+    CompactOperator X1 Y1 T1 /\ CompactOperator X2 Y2 T2 := by
+  -- Unit ball of X1(+)X2 is subset of B_X1(+)B_X2; precompactness follows componentwise
+  sorry
+
+#eval "Direct sum of compact operators"

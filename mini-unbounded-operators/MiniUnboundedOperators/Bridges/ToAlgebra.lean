@@ -69,3 +69,17 @@ theorem spectralProjection_affiliation {H : HilbertSpace} (T : UnboundedOperator
   True
 
 #eval "Bridges.ToAlgebra: AffiliatedOps, TomitaTakesaki, ModularTheory, UnboundedDerivations — loaded"
+
+/-! ## Unbounded Derivations
+
+An unbounded derivation on a C*-algebra corresponds to a generator
+of a strongly continuous one-parameter group of *-automorphisms.
+-/
+
+theorem derivation_generator_correspondence (A : Type u) [CstarAlgebra A]
+    (delta : UnboundedDerivation A) :
+    exists (alpha : Real -> StarAutomorphism A), StronglyContinuous alpha /\
+      (forall a in domain delta, delta a = limit_{t->0} (alpha_t a - a)/t) := by
+  sorry
+
+#eval "Derivation-generator correspondence"

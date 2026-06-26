@@ -75,3 +75,34 @@ def equivEx : EquivalentNorms (List ℝ) where
 #eval "All norms equivalent on finite-dim spaces"
 
 end MiniBanachHilbert
+
+/-! ## Isomorphism of Banach Spaces
+
+Two Banach spaces X and Y are isomorphic if there exists a
+bijective bounded linear operator T : X -> Y with bounded inverse.
+Equivalently: exists constants c, C > 0 such that
+c||x|| <= ||Tx|| <= C||x|| for all x.
+-/
+
+structure BanachIsomorphism (X Y : Type u) [NormedSpace X] [NormedSpace Y] where
+  forward : BoundedLinearOperator X Y
+  backward : BoundedLinearOperator Y X
+  forward_backward : forall y, forward (backward y) = y
+  backward_forward : forall x, backward (forward x) = x
+
+def IsBanachIsomorphic (X Y : Type u) [NormedSpace X] [NormedSpace Y] : Prop :=
+  Nonempty (BanachIsomorphism X Y)
+
+/-! ## Isometric Isomorphism
+
+A linear bijection preserving the norm: ||Tx|| = ||x|| for all x.
+Hilbert spaces are classified up to isometric isomorphism by dimension.
+-/
+
+structure IsometricIsomorphism (X Y : Type u) [NormedSpace X] [NormedSpace Y] where
+  map : X -> Y
+  linear : IsLinear map
+  bijective : IsBijective map
+  isometric : forall x, NormedSpace.norm (map x) = NormedSpace.norm x
+
+#eval "Banach + Isometric isomorphisms"

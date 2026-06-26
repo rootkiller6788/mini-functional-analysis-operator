@@ -50,3 +50,28 @@ def CompactPerturbationEquivalent (H : Type) [InnerProductSpace H]
 #eval "── Compact perturbation equivalence ──"
 
 end MiniBoundedOperators
+
+/-! ## Similarity and Unitary Equivalence
+
+Two operators S, T are similar if S = V T V^{-1} for some invertible V.
+They are unitarily equivalent if V is unitary (V* = V^{-1}).
+Similar operators have the same spectrum; unitarily equivalent
+operators have the same norm and spectral measure.
+-/
+
+def AreSimilar {X : Type u} [NormedSpace ℂ X] [BanachSpace X]
+    (S T : BoundedLinearOperator X X) : Prop :=
+  exists (V : BoundedLinearOperator X X), IsInvertible V /\ S = V * T * (V^{-1})
+
+theorem similar_spectrum_equal {X : Type u} [NormedSpace ℂ X] [BanachSpace X]
+    (S T : BoundedLinearOperator X X) (h : AreSimilar S T) :
+    Spectrum X S = Spectrum X T := by
+  -- If S = V T V^{-1}, then lambda*I - S = V(lambda*I - T)V^{-1}
+  -- So lambda*I - S invertible iff lambda*I - T invertible
+  sorry
+
+def AreUnitarilyEquivalent {H : Type u} [HilbertSpace H]
+    (S T : BoundedLinearOperator H H) : Prop :=
+  exists (U : BoundedLinearOperator H H), IsUnitary U /\ S = U * T * (adjoint U)
+
+#eval "Similarity + Unitary equivalence"

@@ -98,3 +98,16 @@ import MiniDualityWeakTopologies
 namespace MiniDualityWeakTopologies.Docs
 
 #eval "Theory Reference — MiniDualityWeakTopologies (see comments above)"
+
+/-! ## Additional Theory Notes
+
+### Dunford-Pettis Property
+A Banach space X has the Dunford-Pettis property if every weakly
+compact operator from X to any Banach space maps weakly Cauchy
+sequences to norm-convergent sequences.
+
+### Radon-Nikodym Property (RNP)
+A Banach space X has RNP if every vector measure of bounded variation
+with values in X has a Bochner integrable density. Reflexive spaces
+and separable dual spaces have RNP.
+-/

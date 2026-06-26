@@ -77,3 +77,50 @@ theorem hilbert_direct_sum_universal (ι : Type u) (H : ι → Type u)
 #eval "⊕ᵢ Hᵢ is universal receiving isometric embeddings"
 
 end MiniBanachHilbert
+
+/-! ## Universal Property of l^2
+
+l^2(N) is the universal separable Hilbert space: every separable
+Hilbert space embeds isometrically into l^2(N).
+
+Proof: Pick a countable dense set, apply Gram-Schmidt to get an
+orthonormal basis, map basis vectors to standard basis of l^2.
+-/
+
+theorem l2_universal_property (H : Type u) [HilbertSpace H] (h_separable : IsSeparable H) :
+    exists (f : IsometricEmbedding H l2_N), True := by
+  -- Gram-Schmidt on countable dense subset to get orthonormal basis
+  -- Embed by mapping basis -> standard basis, extend by linearity
+  sorry
+
+/-! ## Adjoint Operator
+
+For a bounded linear operator T : H1 -> H2, there exists a unique
+adjoint T* : H2 -> H1 satisfying <Tx, y>_{H2} = <x, T*y>_{H1}.
+-/
+
+theorem adjoint_existence (H1 H2 : Type u) [HilbertSpace H1] [HilbertSpace H2]
+    (T : BoundedLinearOperator H1 H2) :
+    exists! (Tstar : BoundedLinearOperator H2 H1),
+      forall x y, HilbertSpace.inner (T x) y = HilbertSpace.inner x (Tstar y) := by
+  -- For each y, define functional f_y(x) = <Tx, y>; by Riesz, exists T*y with f_y(x) = <x, T*y>
+  -- Verify linearity and boundedness of T*
+  sorry
+
+/-! ## Normal, Unitary, and Self-Adjoint Operators
+
+T is normal if T T* = T* T.
+T is self-adjoint if T = T*.
+T is unitary if T T* = T* T = I.
+-/
+
+def IsNormal {H : Type u} [HilbertSpace H] (T : BoundedLinearOperator H H) : Prop :=
+  T * adjoint T = adjoint T * T
+
+def IsSelfAdjoint {H : Type u} [HilbertSpace H] (T : BoundedLinearOperator H H) : Prop :=
+  T = adjoint T
+
+def IsUnitary {H : Type u} [HilbertSpace H] (T : BoundedLinearOperator H H) : Prop :=
+  T * adjoint T = id /\ adjoint T * T = id
+
+#eval "Universal properties + Adjoint + Normal/SelfAdjoint/Unitary"

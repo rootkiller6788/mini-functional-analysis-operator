@@ -69,3 +69,37 @@ def cauchySchwarzProp (α : Type u) [InnerProductSpace α] (x y : α) : Prop :=
 #eval "cauchySchwarzProp defined"
 
 end MiniBanachHilbert
+
+/-! ## Parallelogram Law
+
+A norm ||.|| comes from an inner product iff it satisfies the
+parallelogram law: ||x+y||^2 + ||x-y||^2 = 2(||x||^2 + ||y||^2).
+-/
+
+theorem parallelogram_law_iff_inner_product (V : Type u) [NormedSpace V] :
+    (exists (inner : V -> V -> Real), IsInnerProduct inner /\ 
+      forall x, NormedSpace.norm x = Real.sqrt (inner x x)) <->
+    (forall x y, (NormedSpace.norm (NormedSpace.add x y))^2 +
+      (NormedSpace.norm (NormedSpace.add x (NormedSpace.neg y)))^2 =
+      2 * ((NormedSpace.norm x)^2 + (NormedSpace.norm y)^2)) := by
+  sorry
+
+theorem polarization_identity (H : Type u) [HilbertSpace H] (x y : H) :
+    HilbertSpace.inner x y = ((HilbertSpace.norm (NormedSpace.add x y))^2 -
+      (HilbertSpace.norm (NormedSpace.add x (NormedSpace.neg y)))^2) / 4 := by
+  -- Expand ||x+y||^2 = <x+y, x+y> = ||x||^2 + 2<x,y> + ||y||^2
+  -- Similarly ||x-y||^2 = ||x||^2 - 2<x,y> + ||y||^2
+  -- Subtract: ||x+y||^2 - ||x-y||^2 = 4<x,y>
+  sorry
+
+#eval "Parallelogram law + Polarization identity"
+/- Pythagorean theorem in Hilbert spaces: x and y orthogonal => ||x+y||^2 = ||x||^2+||y||^2 -/
+theorem pythagorean (H : Type u) [HilbertSpace H] (x y : H) (h_ortho : HilbertSpace.inner x y = 0) : (HilbertSpace.norm (NormedSpace.add x y))^2 = (HilbertSpace.norm x)^2 + (HilbertSpace.norm y)^2 := by
+  calc
+    (HilbertSpace.norm (NormedSpace.add x y))^2 = HilbertSpace.inner (NormedSpace.add x y) (NormedSpace.add x y) := by
+      rw [HilbertSpace.norm_eq_sqrt_inner]
+      sorry
+    _ = HilbertSpace.inner x x + 2 * HilbertSpace.inner x y + HilbertSpace.inner y y := by sorry
+    _ = (HilbertSpace.norm x)^2 + (HilbertSpace.norm y)^2 := by
+      rw [h_ortho]
+      sorry

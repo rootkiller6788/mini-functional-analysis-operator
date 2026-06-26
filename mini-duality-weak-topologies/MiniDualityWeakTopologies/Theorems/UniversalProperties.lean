@@ -76,3 +76,19 @@ theorem weakStarContinuousCriterion {X Y : Type _}
   sorry
 
 #eval "Theorems.UniversalProperties — dualRepresentsHom, dualIsComplete, bidualExtensionProperty, canonicalEmbeddingIsUnit"
+
+/-! ## Bipolar Theorem
+
+For any subset M of a normed space X, the bipolar M^{oo} (in X**)
+equals the weak-* closure of the canonical image of the absolutely
+convex hull of M. In particular, for a subspace, M^{oo} = weak* closure.
+-/
+
+theorem bipolar_theorem (X : Type u) [NormedSpace X] (M : Set X) (h_balanced : IsBalanced M) :
+    bipolar M = weakStarClosure (canonicalEmbedding X '' M) := by
+  -- M subset M^{oo} trivially; M^{oo} is weak* closed convex balanced
+  -- If x not in weak* closure of M cone, separation theorem gives f in X*
+  -- with f(x) > sup f(M) => x not in M^{oo}
+  sorry
+
+#eval "Bipolar theorem"

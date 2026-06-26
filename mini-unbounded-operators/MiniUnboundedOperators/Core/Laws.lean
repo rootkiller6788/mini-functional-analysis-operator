@@ -78,3 +78,21 @@ theorem friedrichsExtension_maximal {H : HilbertSpace} (T : UnboundedOperator H)
   True
 
 #eval "Core.Laws: AdjointProps, StoneThm, HilleYosida, KatoRellich, Friedrichs — loaded"
+
+/-! ## Spectral Calculus for Unbounded Operators
+
+The functional calculus extends from polynomials to bounded Borel
+functions for self-adjoint operators, and to measurable functions
+for normal operators.
+-/
+
+theorem spectral_calculus_continuous (H : Type u) [HilbertSpace H]
+    (A : UnboundedSelfAdjointOperator H) (f : ContinuousBoundedFunction Real Real) :
+    exists! (f_A : BoundedLinearOperator H H),
+      (forall lambda, f_A (spectralProjection A lambda) = f lambda * spectralProjection A lambda) /\
+      ||f_A|| <= sup {|f lambda| | lambda in Real} := by
+  -- Approximate f uniformly by simple functions; define f(A) as norm limit
+  -- of corresponding simple function operators via spectral projections
+  sorry
+
+#eval "Spectral calculus for unbounded operators"

@@ -59,3 +59,21 @@ axiom spectrum_adjoint_conjugate (H : Type) [InnerProductSpace H]
 #eval "── σ(T*) = conj(σ(T)) ──"
 
 end MiniBoundedOperators
+
+/-! ## Spectrum Under Perturbations
+
+Small perturbations of an operator shift the spectrum continuously.
+If S is small relative to T, then sigma(T+S) subset sigma(T) + B(0, ||S||).
+-/
+
+theorem spectrum_upper_semicontinuous {X : Type u} [NormedSpace ℂ X] [BanachSpace X]
+    (T : BoundedLinearOperator X X) (epsilon : Real) (h_epsilon : epsilon > 0) :
+    exists delta > 0, forall (S : BoundedLinearOperator X X), operatorNorm S < delta ->
+      Spectrum X (T + S) subset {lambda : ℂ | exists mu in Spectrum X T, |lambda - mu| < epsilon} := by
+  sorry
+
+#eval "Spectrum upper semicontinuity"
+
+/- Spectral stability under compact perturbations: sigma_ess(T+K) = sigma_ess(T) -/
+-- Compact perturbations preserve essential spectrum (Weyl's theorem)
+ 

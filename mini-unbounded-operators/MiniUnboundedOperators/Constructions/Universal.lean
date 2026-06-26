@@ -69,3 +69,33 @@ theorem lumerPhillips_universal {H : HilbertSpace} (A : UnboundedOperator H) : P
   True
 
 #eval "Constructions.Universal: StoneCorrespondence, FriedrichsUniversal, CayleyUniversal, GeneratorUniversal — loaded"
+
+/-! ## Operator Closure
+
+Every closable operator has a minimal closed extension, its closure.
+The closure is defined by taking the graph closure in H x H.
+-/
+
+theorem operator_closure_exists (H : Type u) [HilbertSpace H]
+    (T : LinearOperator H H) (h_closable : IsClosable T) :
+    exists! (T_bar : ClosedOperator H H), T subset T_bar /\
+      (forall (S : ClosedOperator H H), T subset S -> T_bar subset S) := by
+  -- Take the closure of the graph G(T) in H x H
+  -- Verify it is the graph of a linear operator (no vertical segments)
+  -- This requires that (0,y) in closure(G(T)) => y = 0, which is exactly closability
+  sorry
+
+/-! ## Adjoint of Unbounded Operator
+
+The adjoint T* of a densely defined operator T is defined by:
+domain(T*) = {y : exists z, forall x in domain(T), <Tx, y> = <x, z>}
+T* y = z.
+-/
+
+theorem adjoint_densely_defined (H : Type u) [HilbertSpace H]
+    (T : DenselyDefinedOperator H H) : IsClosedOperator (adjoint T) := by
+  -- The adjoint has closed graph because the graph of T* is the orthogonal
+  -- complement of (-J)(graph(T)) where J(x,y) = (y,-x)
+  sorry
+
+#eval "Operator closure + adjoint"

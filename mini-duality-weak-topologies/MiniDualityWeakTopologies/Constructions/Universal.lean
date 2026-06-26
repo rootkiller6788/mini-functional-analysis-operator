@@ -66,3 +66,51 @@ def operatorBidualExtension {X Y : Type _} [NormedAddCommGroup X] [NormedSpace â
   sorry
 
 #eval "Constructions.Universal â€” universalPropertyDual, universalPropertyWeakStar, universalEmbeddingBidual, bidualIsComplete, operatorBidualExtension"
+
+/-! ## Weak Topology Construction
+
+The weak topology sigma(X, X*) is the coarsest topology making all
+f in X* continuous. It is Hausdorff (separates points) and locally convex.
+-/
+
+theorem weak_topology_hausdorff (X : Type u) [NormedSpace X] :
+    IsHausdorff (weakTopology X) := by
+  -- If x != y, by Hahn-Banach exists f in X* with f(x) != f(y)
+  -- Then f^{-1}(U) and f^{-1}(V) separate x and y
+  sorry
+
+/-! ## Weak-* Topology Construction
+
+The weak-* topology sigma(X*, X) is the topology of pointwise
+convergence on X*, making all evaluation maps f |-> f(x) continuous.
+-/
+
+def weakStarTopology (X : Type u) [NormedSpace X] : TopologicalSpace (DualSpace X) :=
+  initialTopology (fun (x : X) (f : DualSpace X) => f.map x)
+
+/-! ## Metrizability of Weak Topologies
+
+The weak topology on a separable normed space is metrizable on
+bounded subsets. The weak-* topology on the dual of a separable
+space is metrizable on the dual unit ball.
+-/
+
+theorem weak_metrizable_on_bounded (X : Type u) [NormedSpace X] (h_separable : IsSeparable X)
+    (B : Set X) (h_bounded : IsBounded B) : IsMetrizable (weakTopology X |_ B) := by
+  -- Let {x_n} be dense in X; define metric d(f,g) = sum 2^{-n} min(1, |f(x_n)-g(x_n)|)
+  -- This metric induces the weak topology on bounded sets
+  sorry
+
+/-! ## Alaoglu-Bourbaki Theorem
+
+Equicontinuous subsets of X* are relatively compact in the topology
+of pointwise convergence. Banach-Alaoglu is the special case for
+the unit ball (which is equicontinuous by Banach-Steinhaus).
+-/
+
+theorem alaoglu_bourbaki (X : Type u) [TopologicalSpace X] (E : Set (ContinuousMap X Real))
+    (h_equicontinuous : IsEquicontinuous E) :
+    IsRelativelyCompact (pointwiseConvergenceTopology) E := by
+  sorry
+
+#eval "Weak/weak* topology construction + metrizability"

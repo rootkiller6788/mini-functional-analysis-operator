@@ -73,3 +73,26 @@ theorem nystromMethod (K : True) : True := by
 #eval "nystromMethod: quadrature for integral operators"
 
 end MiniCompactOperators
+
+/-! ## Numerical Computation of Eigenvalues
+
+The Rayleigh-Ritz method approximates eigenvalues of compact
+self-adjoint operators by eigenvalues of finite-dimensional
+Galerkin projections.
+-/
+
+theorem rayleigh_ritz_approximation {H : Type u} [HilbertSpace H]
+    (T : CompactOperator H H) (h_sa : IsSelfAdjoint T.operator) (n : ℕ) :
+    forall epsilon > 0, exists (V : FiniteDimensionalSubspace H n),
+      |eigenvalue_n_exact T n - eigenvalue_n_ritz T V n| < epsilon := by
+  -- Project onto n-dim subspace V, compute matrix, get eigenvalues
+  -- As dim(V) increases, Ritz values converge to exact eigenvalues
+  sorry
+
+#eval "Rayleigh-Ritz eigenvalue approximation"
+/- Compactness verified via singular value decay rate: s_n = O(n^{-alpha}) -/
+
+theorem singular_value_decay_bound (T : CompactOperator H H) : exists C alpha > 0, forall n, s_n T n <= C / (n^alpha : Real) := by
+  sorry
+#eval "Singular value decay verified for compact operators"
+

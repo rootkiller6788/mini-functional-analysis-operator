@@ -86,3 +86,39 @@ theorem banachMazur (α : Type u) [BanachSpace α]
 #eval "Every separable Banach ↪ C[0,1]"
 
 end MiniBanachHilbert
+
+/-! ## Hilbert Space Classification
+
+Every separable Hilbert space is isometrically isomorphic to l^2(N).
+Finite-dimensional Hilbert spaces are classified by dimension alone.
+-/
+
+theorem hilbert_classification (H : Type u) [HilbertSpace H]
+    (h_separable : IsSeparable H) (h_infinite_dim : not (IsFiniteDimensional H)) :
+    IsIsometric H l2_N := by
+  -- Pick a countable orthonormal basis via Gram-Schmidt on a dense countable set
+  -- Map basis vectors to standard basis of l^2
+  -- Extend linearly and verify isometry
+  sorry
+
+theorem finite_dim_hilbert_classification (H1 H2 : Type u) [HilbertSpace H1] [HilbertSpace H2]
+    (h_dim_eq : Dim H1 = Dim H2) (h_finite : IsFiniteDimensional H1) :
+    IsIsometric H1 H2 := by
+  -- Pick orthonormal bases of same cardinality, map bijectively
+  sorry
+
+/-! ## Spectral Theorem for Compact Self-Adjoint Operators
+
+Every compact self-adjoint operator T on a Hilbert space has an
+orthonormal basis of eigenvectors with real eigenvalues tending to 0.
+-/
+
+theorem spectral_theorem_compact_self_adjoint (H : Type u) [HilbertSpace H]
+    (T : BoundedLinearOperator H H) (h_compact : IsCompact T) (h_self_adjoint : IsSelfAdjoint T) :
+    exists (basis : Nat -> H) (eigenvalues : Nat -> Real),
+      IsOrthonormal basis /\ (forall n, T (basis n) = eigenvalues n * basis n) /\
+      (eigenvalues n -> 0 as n -> infinity) /\
+      (forall x, T x = limit (sum_{k=0}^N eigenvalues k * <x, basis k> * basis k)) := by
+  sorry
+
+#eval "Hilbert classification + Spectral theorem"

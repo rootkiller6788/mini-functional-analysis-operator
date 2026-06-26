@@ -60,3 +60,21 @@ theorem quotientNorm_zero (α : Type u) [NormedSpace α] (Y : Set α) (h : Norme
 #eval "quotientBanach: closed Y → X/Y is Banach (sorry)"
 
 end MiniBanachHilbert
+
+/-! ## Quotient Norm
+
+For a closed subspace M of a normed space X, the quotient space
+X/M is a normed space with norm ||[x]|| = inf_{m in M} ||x + m||.
+If X is Banach, X/M is Banach.
+-/
+
+theorem quotient_norm_well_defined (V : Type u) [NormedSpace V] [BanachSpace V]
+    (M : Set V) (hM_closed : IsClosed M) (hM_subspace : IsSubspace M) :
+    BanachSpace (Quotient V M) := by
+  sorry
+
+#eval "Quotient Banach space"
+
+/-! ## Summary
+Quotient spaces complete the constructive toolkit for Banach spaces.
+-/

@@ -76,3 +76,18 @@ theorem resolvent_universal {H : HilbertSpace} (A : UnboundedOperator H) : Prop 
   sorry
 
 #eval "Theorems.UniversalProperties: FriedrichsUniversal, CayleyUniversal, StoneGenerator, FunctionalCalc — loaded"
+
+/-! ## Trotter-Kato Product Formula
+
+For self-adjoint A,B with A+B essentially self-adjoint:
+e^{it(A+B)} = lim_{n->inf} (e^{itA/n} e^{itB/n})^n (strong limit).
+-/
+
+theorem trotter_kato_formula (H : Type u) [HilbertSpace H]
+    (A B : UnboundedSelfAdjointOperator H) (h_ess_sa : IsEssentiallySelfAdjoint (A + B)) :
+    forall t : Real, forall x : H,
+      e^{Complex.I * t * closure(A+B)} x = lim (fun n => (e^{Complex.I * t/n * A} * e^{Complex.I * t/n * B})^n x) := by
+  -- Show strong convergence of the product formula via Chernoff's theorem
+  sorry
+
+#eval "Trotter-Kato product formula"

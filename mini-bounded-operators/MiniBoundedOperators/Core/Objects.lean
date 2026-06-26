@@ -45,3 +45,26 @@ structure OperatorSubclass (𝕂 : Type) [Field 𝕂] (X : Type) [NormedSpace �
 #eval "── OperatorSubclass defined ──"
 
 end MiniBoundedOperators
+
+/-! ## Special Operator Classes
+
+- Positive operator (on Hilbert space): <Tx, x> >= 0 for all x
+- Projection: P^2 = P (idempotent)
+- Partial isometry: T T* T = T
+- Fredholm operator: dim ker T < inf, dim coker T < inf, closed range
+-/
+
+def IsPositive {H : Type u} [HilbertSpace H] (T : BoundedLinearOperator H H) : Prop :=
+  forall x : H, HilbertSpace.inner (T x) x >= 0
+
+def IsProjection {X : Type u} [NormedSpace ℂ X] (P : BoundedLinearOperator X X) : Prop :=
+  P * P = P
+
+def IsPartialIsometry {H : Type u} [HilbertSpace H] (V : BoundedLinearOperator H H) : Prop :=
+  V * adjoint V * V = V
+
+def FredholmIndex {X Y : Type u} [NormedSpace ℂ X] [NormedSpace ℂ Y] [BanachSpace X] [BanachSpace Y]
+    (T : BoundedLinearOperator X Y) (h_fred : IsFredholm T) : ℤ :=
+  (dim (ker T) : ℤ) - (dim (coker T) : ℤ)
+
+#eval "Special operators: Positive + Projection + Partial Isometry + Fredholm"

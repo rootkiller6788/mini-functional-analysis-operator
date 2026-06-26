@@ -83,3 +83,35 @@ theorem sixTermExactSequence {H : Type u} [InnerProductSpace ℂ H] [CompleteSpa
 #eval "sixTermExactSequence: K-theory of ideal extension"
 
 end MiniCompactOperators
+
+/-! ## Compactness Under Multiplication
+
+If T is compact and S is bounded, then ST and TS are compact.
+Compact operators form the unique closed two-sided ideal in B(X)
+for X = l^p (p in [1,inf)) and X = Hilbert spaces.
+-/
+
+theorem compact_ideal_unique {H : Type u} [HilbertSpace H] :
+    IsUniqueClosedIdeal (CompactOperators H) (BoundedLinearOperators H) := by
+  -- Any nonzero closed ideal contains a rank-1 operator
+  -- Rank-1 operators generate K(H) as closed ideal
+  -- Therefore K(H) is the only nontrivial closed ideal
+  sorry
+
+/-! ## Schauder Basis and Compactness
+
+If X has a Schauder basis, then the natural projections P_n onto
+span{e_1,...,e_n} converge strongly to I, and I - P_n is a
+uniformly bounded sequence converging to 0 on compact sets.
+-/
+
+theorem schauder_basis_compact_approximation {X : Type u} [NormedAddCommGroup X] [CompleteSpace X]
+    (basis : ℕ -> X) (h_schauder : IsSchauderBasis basis) (K : Set X) (h_compact : IsCompact K) :
+    forall epsilon > 0, exists N : ℕ, forall n >= N, forall x in K,
+      ‖x - (PartialSumProjection basis n) x‖ < epsilon := by
+  -- Compact K can be covered by finitely many epsilon/3-balls
+  -- For each center, basis expansion converges => exists N_center
+  -- Take N = max N_center; uniform bound follows
+  sorry
+
+#eval "Compact ideal + Schauder basis approximation"

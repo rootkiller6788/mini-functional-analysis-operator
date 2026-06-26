@@ -77,3 +77,32 @@ theorem resolvent_open (𝕂 : Type) [Field 𝕂] (X : Type) [NormedSpace 𝕂 X
 #eval "── T invertible iff 0 ∉ σ(T) ──"
 
 end MiniBoundedOperators
+
+/-! ## Operator Algebra B(X)
+
+B(X) = {T : X -> X | T is bounded and linear} is a Banach algebra
+with composition as multiplication and operator norm.
+B(X) is unital with identity I.
+-/
+
+theorem banach_algebra_BX (X : Type u) [NormedSpace ℂ X] [BanachSpace X] :
+    BanachAlgebra ℂ (BoundedLinearOperator X X) := by
+  -- Verify: B(X) is a Banach space with operator norm
+  -- Composition is bilinear and submultiplicative: ||ST|| <= ||S|| ||T||
+  -- Identity I satisfies ||I|| = 1
+  sorry
+
+/-! ## Neumann Series
+
+If ||T|| < 1, then I - T is invertible with (I-T)^{-1} = sum_{n=0}^inf T^n.
+The series converges absolutely in operator norm.
+-/
+
+theorem neumann_series (X : Type u) [NormedSpace ℂ X] [BanachSpace X]
+    (T : BoundedLinearOperator X X) (h : operatorNorm T < 1) :
+    IsInvertible (I - T) /\ (I - T)^{-1} = sum (fun n : ℕ => T^n) := by
+  -- Geometric series in Banach algebra: partial sums are Cauchy since ||T||<1
+  -- Limit S satisfies (I-T)S = S(I-T) = I
+  sorry
+
+#eval "B(X) Banach algebra + Neumann series"

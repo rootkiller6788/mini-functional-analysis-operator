@@ -48,3 +48,32 @@ structure UniversalCstarAlgebra where
 #eval "── B(H) as universal C*-algebra ──"
 
 end MiniBoundedOperators
+
+/-! ## Ideal of Compact Operators
+
+K(X) = {compact operators on X} is a closed two-sided ideal in B(X).
+If T in B(X) and K in K(X), then TK and KT are compact.
+-/
+
+theorem compact_ideal_property {X : Type u} [NormedSpace ℂ X] [BanachSpace X]
+    (T : BoundedLinearOperator X X) (K : CompactOperator X X) :
+    compactOperator (T * K) /\ compactOperator (K * T) := by
+  -- T maps bounded sets to bounded sets, so T(K(B(0,1))) is precompact
+  -- K(T(B(0,1))) is precompact since T(B(0,1)) is bounded and K maps bounded to precompact
+  sorry
+
+/-! ## Calkin Algebra
+
+The Calkin algebra is B(X)/K(X), the quotient of bounded operators
+by the ideal of compact operators. Essential spectrum is the
+spectrum in the Calkin algebra.
+-/
+
+def CalkinAlgebra (X : Type u) [NormedSpace ℂ X] [BanachSpace X] : Type u :=
+  Quotient (BoundedLinearOperator X X) (CompactOperator X X)
+
+def EssentialSpectrum (X : Type u) [NormedSpace ℂ X] [BanachSpace X]
+    (T : BoundedLinearOperator X X) : Set ℂ :=
+  Spectrum (CalkinAlgebra X) (Quotient.map T)
+
+#eval "Compact ideal + Calkin algebra"

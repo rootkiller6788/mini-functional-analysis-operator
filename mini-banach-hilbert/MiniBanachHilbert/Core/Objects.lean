@@ -57,3 +57,38 @@ def registerHilbertSpace (α : Type u) [HilbertSpace α] : IO Unit :=
 #eval "NormedQuotient with quotient norm"
 
 end MiniBanachHilbert
+
+/-! ## Dual Space
+
+The dual space V* is the space of all bounded linear functionals
+on V, equipped with the operator norm: ||f|| = sup_{||x||<=1} |f(x)|.
+V* is always a Banach space regardless of whether V is complete.
+-/
+
+def DualSpace (V : Type u) [NormedSpace V] : Type u :=
+  BoundedLinearFunctional V
+
+def dual_norm {V : Type u} [NormedSpace V] (f : DualSpace V) : Real :=
+  sup {|f.map x| | x : V, NormedSpace.norm x <= 1}
+
+theorem dual_is_banach (V : Type u) [NormedSpace V] : BanachSpace (DualSpace V) := by
+  -- The dual of any normed space is complete: verify Cauchy sequences in V* converge
+  sorry
+
+/-! ## Double Dual and Canonical Embedding
+
+The canonical embedding J : V -> V** is defined by J(x)(f) = f(x).
+V is reflexive if J is surjective.
+-/
+
+def canonical_embedding (V : Type u) [NormedSpace V] (x : V) : DualSpace (DualSpace V) :=
+  { map := fun f => f.map x
+    linear := by
+      intro a b f g; simp
+    bounded := by
+      exists |NormedSpace.norm x|
+      intro f; calc
+        |f.map x| <= |f.map x| := by rfl
+  }
+
+#eval "Dual space + canonical embedding"

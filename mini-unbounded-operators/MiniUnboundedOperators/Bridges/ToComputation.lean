@@ -75,3 +75,31 @@ theorem weylEigenvalueBounds {H : HilbertSpace} (A B : UnboundedOperator H) : Pr
   sorry
 
 #eval "Bridges.ToComputation: Galerkin, FiniteElement, Lanczos, WeylBounds — loaded"
+
+/-! ## Numerical Range
+
+The numerical range W(T) = {<Tx, x> : x in domain(T), ||x||=1} is convex
+(Toeplitz-Hausdorff theorem) and contains the spectrum for closed operators.
+-/
+
+theorem toeplitz_hausdorff (H : Type u) [HilbertSpace H] (T : LinearOperator H H) :
+    IsConvex (numericalRange T) := by
+  -- For x,y in H with ||x||=||y||=1, define curve gamma(t) = (1-t)<Tx,x> + t<Ty,y>
+  -- Show every point on the segment is in W(T) by constructing appropriate unit vectors
+  sorry
+
+/-! ## Rayleigh Quotient for Unbounded Operators
+
+For self-adjoint A bounded below, the lowest eigenvalue (or bottom
+of spectrum) is min_{x in domain(A), x!=0} <Ax,x>/||x||^2.
+-/
+
+theorem rayleigh_quotient_min (H : Type u) [HilbertSpace H]
+    (A : UnboundedSelfAdjointOperator H) (h_bounded_below : exists c, forall x in domain A, <A x, x> >= c * ||x||^2) :
+    inf (Spectrum A) = inf {<A x, x> / ||x||^2 | x in domain A, x != 0} := by
+  -- If lambda below the Rayleigh quotient infimum, then A - lambda*I is positive
+  -- and injective; can construct bounded inverse via Lax-Milgram
+  -- => lambda in resolvent set
+  sorry
+
+#eval "Numerical range + Rayleigh quotient"

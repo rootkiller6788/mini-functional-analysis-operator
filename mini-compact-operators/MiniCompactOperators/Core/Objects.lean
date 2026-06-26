@@ -78,3 +78,33 @@ theorem K_Ideal_isClosed {H : Type u} [InnerProductSpace ℂ H] [CompleteSpace H
 #eval "K_Ideal_isIdeal, K_Ideal_isClosed"
 
 end MiniCompactOperators
+
+/-! ## Integral Operators
+
+The prototypical compact operator: (Kf)(x) = integral K(x,y) f(y) dy
+with continuous kernel K on [0,1] x [0,1] is compact on L^2[0,1].
+-/
+
+theorem integral_operator_compact (K : ContinuousFunction [0,1]*[0,1] ℂ) :
+    CompactOperator (L2 0 1) (L2 0 1) (IntegralOperator K) := by
+  -- Approximate K by simple functions (step functions on partitions)
+  -- Simple function kernels => finite rank operators
+  -- L^2 limit of finite rank => compact
+  sorry
+
+/-! ## Weak Convergence and Compactness
+
+A compact operator maps weakly convergent sequences to norm-convergent
+sequences. Equivalently: if x_n -> x weakly, then T x_n -> T x in norm.
+-/
+
+theorem compact_maps_weak_to_norm {X Y : Type u} [NormedAddCommGroup X] [NormedAddCommGroup Y]
+    [CompleteSpace X] [CompleteSpace Y] (T : CompactOperator X Y)
+    (seq : ℕ -> X) (x : X) (h_weak : WeakConvergesTo seq x) :
+    NormConvergesTo (fun n => T.operator (seq n)) (T.operator x) := by
+  -- If not, exists epsilon > 0 and subsequence with ||T(x_nk - x)|| >= epsilon
+  -- By weak convergence, x_nk - x weakly -> 0, hence bounded (uniform boundedness)
+  -- By compactness, T(x_nk - x) has norm-convergent subsequence -> contradiction
+  sorry
+
+#eval "Integral operators + weak-to-norm property"

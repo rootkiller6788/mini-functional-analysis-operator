@@ -60,3 +60,29 @@ def tensorProductSemigroup {H K : HilbertSpace} (T : StronglyContinuousSemigroup
   True
 
 #eval "Constructions.Products: DirectSum, ProductSemigroup, TensorSemigroup — loaded"
+
+/-! ## Direct Sum of Unbounded Operators
+
+The direct sum A (+) B is self-adjoint on H1 (+) H2 iff A and B
+are self-adjoint on H1 and H2 respectively.
+-/
+
+theorem direct_sum_self_adjoint (H1 H2 : Type u) [HilbertSpace H1] [HilbertSpace H2]
+    (A : UnboundedSelfAdjointOperator H1) (B : UnboundedSelfAdjointOperator H2) :
+    UnboundedSelfAdjointOperator (H1 (+) H2) (A (+) B) := by
+  -- (A(+)B)* = A*(+)B* = A(+)B since A and B are self-adjoint
+  sorry
+
+/-! ## Tensor Product
+
+A tensor B has natural extension to H1 tensor H2 as the closure
+of the algebraic tensor product. For self-adjoint A,B, the closure
+is essentially self-adjoint.
+-/
+
+theorem tensor_product_essentially_self_adjoint (H1 H2 : Type u) [HilbertSpace H1] [HilbertSpace H2]
+    (A : UnboundedSelfAdjointOperator H1) (B : UnboundedSelfAdjointOperator H2) :
+    IsEssentiallySelfAdjoint ((A tensor I) + (I tensor B)) := by
+  sorry
+
+#eval "Direct sum + tensor product of unbounded operators"

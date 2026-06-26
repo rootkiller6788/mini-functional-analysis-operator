@@ -70,3 +70,21 @@ def subspaceWeakTopology (X : Type _) [NormedAddCommGroup X] [NormedSpace ℝ X]
   trivial
 
 #eval "Constructions.Subobjects — Predual, subspaceDualIso, restrictionMap, restrictionMapSurjective"
+
+/-! ## Weak-* Sequential Compactness of the Dual Ball
+
+If X is separable, then the closed unit ball of X* is weak-*
+sequentially compact (Helly's selection theorem).
+-/
+
+theorem helly_selection (X : Type u) [NormedSpace X] [BanachSpace X]
+    (h_separable : IsSeparable X) (seq : Nat -> closedUnitBall (DualSpace X)) :
+    exists (f : closedUnitBall (DualSpace X)) (subseq : Nat -> Nat), StrictlyIncreasing subseq /\
+      WeakStarConvergesTo (fun n => seq (subseq n)) f := by
+  -- Diagonal argument: list countable dense set {x_m} in X
+  -- For each x_1, extract subsequence where f_{n_k}(x_1) converges
+  -- Repeat for x_2 on this subsequence, etc.
+  -- Diagonal sequence converges at all x_m => converges weak-*
+  sorry
+
+#eval "Helly selection theorem"

@@ -76,3 +76,37 @@ theorem naimarkGeneralizedResolvent {H : HilbertSpace} (T : UnboundedOperator H)
   sorry
 
 #eval "Theorems.Classification: vonNeumann, Weyl, Krein, Friedrichs/Krein ordering, BoundaryTriplets — loaded"
+
+/-! ## Classification of Self-Adjoint Extensions
+
+Von Neumann's theory: symmetric operators with equal deficiency
+indices have self-adjoint extensions. The deficiency indices
+n_+ = dim ker(T* - iI), n_- = dim ker(T* + iI) classify extensions.
+-/
+
+theorem von_neumann_extension_theory (H : Type u) [HilbertSpace H]
+    (T : SymmetricOperator H) (h_closed : IsClosed T) :
+    (exists (A : UnboundedSelfAdjointOperator H), T subset A) <->
+    dim (ker (adjoint T - Complex.I * I)) = dim (ker (adjoint T + Complex.I * I)) := by
+  -- Forward: if A is self-adjoint extension, then A is closed symmetric extension
+  -- A +/- iI surjective => dim ker(T* -/+ iI) = dim(domain(A)/domain(T)) (equal)
+  -- Backward: if deficiency indices equal, pick unitary V : D_+ -> D_-
+  -- Define A on domain(T) + {x + Vx : x in D_+} by A(y + x + Vx) = Ty + ix - iVx
+  -- Verify A is self-adjoint
+  sorry
+
+/-! ## Deficiency Indices Computation
+
+For the momentum operator -i d/dx on L^2[0,inf), deficiency indices
+are (1,0) for Dirichlet BC => no self-adjoint extension exists.
+For L^2(R), deficiency indices are (0,0) => essentially self-adjoint.
+-/
+
+theorem momentum_operator_deficiency (interval : Set Real) :
+    deficiencyIndices (momentumOperator interval) = (dim L2(interval), dim L2(interval)) := by
+  -- Solve -i du/dx = +/- i u => u(x) = C e^{+/- x}
+  -- For [0,inf): e^{+x} not in L^2 => dim ker = 0; e^{-x} in L^2 => dim ker = 1
+  -- For R: neither e^{+/- x} in L^2 => (0,0)
+  sorry
+
+#eval "Von Neumann deficiency theory"

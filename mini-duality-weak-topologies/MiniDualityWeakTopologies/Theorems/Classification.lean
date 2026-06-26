@@ -75,3 +75,32 @@ theorem separableDualWeakStarSequentiallyCompact {X : Type _}
   sorry
 
 #eval "Theorems.Classification — jamesTheorem, jamesReflexivity, eberleinSmulian, reflexivityBallWeaklyCompact"
+
+/-! ## Classification of Dual Spaces
+
+l^1 = c_0*: The dual of sequences converging to 0 is l^1.
+l^inf = l^1*: The dual of absolutely summable sequences is bounded sequences.
+L^p* = L^q for 1 < p < inf, 1/p + 1/q = 1.
+C[0,1]* = M[0,1]: Riesz-Markov-Kakutani (dual of continuous functions = Radon measures).
+-/
+
+theorem dual_lp_lq (p : Real) (h_p : 1 < p) (q : Real) (h_q : 1/p + 1/q = 1) :
+    IsIsomorphic (DualSpace (Lp p)) (Lp q) := by
+  -- Holder inequality => L^q embeds in (L^p)* via g |-> (f |-> integral f g)
+  -- Radon-Nikodym => every functional in (L^p)* is representable this way
+  sorry
+
+/-! ## Schur's Property of l^1
+
+In l^1, weak sequential convergence implies norm convergence.
+This is false for every other L^p space (p > 1).
+-/
+
+theorem schur_property_l1 (seq : Nat -> l1) (x : l1) (h_weak : WeakConvergesTo seq x) :
+    NormConvergesTo seq x := by
+  -- If not, exists epsilon > 0 and subsequence with ||x_nk - x||_1 >= epsilon
+  -- Using "gliding hump" construction, extract a further subsequence whose
+  -- norms concentrate on disjoint supports => contradicts weak convergence
+  sorry
+
+#eval "Classification: dual spaces + Schur property"

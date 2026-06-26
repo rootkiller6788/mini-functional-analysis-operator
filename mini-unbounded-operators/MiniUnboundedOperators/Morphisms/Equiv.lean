@@ -67,3 +67,24 @@ def FriedrichsUniversalArrow {H : HilbertSpace} (T : UnboundedOperator H) : Prop
   True
 
 #eval "Morphisms.Equiv: CayleyEquiv, GeneratorSemigroupEquiv, StoneEquiv, FriedrichsArrow — loaded"
+
+/-! ## Unitary Equivalence of Unbounded Self-Adjoint Operators
+
+Two unbounded self-adjoint operators A and B are unitarily equivalent
+if exists unitary U such that U(domain A) = domain B and U A U* = B.
+Unitary equivalence preserves spectrum and spectral type.
+-/
+
+def UnboundedUnitaryEquivalent (H : Type u) [HilbertSpace H]
+    (A B : UnboundedSelfAdjointOperator H) : Prop :=
+  exists (U : UnitaryOperator H),
+    U '' domain A = domain B /\ forall x in domain A, U (A x) = B (U x)
+
+theorem unitary_equivalence_preserves_spectrum (H : Type u) [HilbertSpace H]
+    (A B : UnboundedSelfAdjointOperator H) (h : UnboundedUnitaryEquivalent A B) :
+    Spectrum (CalkinAlgebra H) A = Spectrum (CalkinAlgebra H) B := by
+  -- U maps resolvent set of A to resolvent set of B bijectively
+  -- (lambda*I - B)^{-1} = U(lambda*I - A)^{-1}U*
+  sorry
+
+#eval "Unbounded unitary equivalence"

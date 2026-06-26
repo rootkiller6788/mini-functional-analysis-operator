@@ -120,3 +120,30 @@ def classicalSpaces : List BanachSpaceClassificationData :=
 #eval classicalSpaces.length
 
 end MiniBanachHilbert
+
+/-! ## Banach Space Classification Data
+
+- Reflexive: X ≅ X** (canonical embedding is surjective)
+- Separable: has a countable dense subset
+- Uniformly convex: forall epsilon > 0, exists delta, ||x||=||y||=1 and ||x-y||>=epsilon implies ||(x+y)/2|| <= 1-delta
+-/
+
+def IsReflexive (V : Type u) [NormedSpace V] : Prop :=
+  IsSurjective (canonical_embedding V (bidual V))
+
+def IsUniformlyConvex (V : Type u) [NormedSpace V] : Prop :=
+  forall epsilon > 0, exists delta > 0, forall x y,
+    NormedSpace.norm x = 1 -> NormedSpace.norm y = 1 ->
+    NormedSpace.norm (NormedSpace.add x y) >= epsilon ->
+    NormedSpace.norm (NormedSpace.add x y) / 2 <= 1 - delta
+
+/-! ## Milman-Pettis Theorem
+
+Every uniformly convex Banach space is reflexive.
+-/
+
+theorem milman_pettis (V : Type u) [NormedSpace V] [BanachSpace V]
+    (h_uniformly_convex : IsUniformlyConvex V) : IsReflexive V := by
+  sorry
+
+#eval "Classification: reflexive + uniformly convex"

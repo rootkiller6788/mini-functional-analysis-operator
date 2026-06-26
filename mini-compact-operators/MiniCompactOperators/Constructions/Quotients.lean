@@ -75,3 +75,36 @@ theorem K_theOnlyIdeal {H : Type u}
 #eval "K_theOnlyIdeal: K(H) is the unique proper closed ideal"
 
 end MiniCompactOperators
+
+/-! ## Calkin Algebra and Atkinson's Theorem
+
+T in B(X) is Fredholm iff its image in the Calkin algebra B(X)/K(X)
+is invertible. This characterizes Fredholm operators purely
+algebraically.
+-/
+
+theorem atkinson_theorem (X : Type u) [NormedAddCommGroup X] [CompleteSpace X]
+    (T : BoundedLinearOperator X X) :
+    IsFredholm T <-> IsInvertible (Quotient.map T : CalkinAlgebra X) := by
+  -- Forward: Fredholm => exists parametrix S with I - ST, I - TS compact
+  -- => S is inverse modulo compacts => invertible in Calkin
+  -- Backward: invertible in Calkin => exists S with I-ST, I-TS compact
+  -- => dim ker <= dim ker(I-ST) < inf (Riesz), similarly for coker
+  sorry
+
+/-! ## Index is Homotopy Invariant
+
+The Fredholm index is constant on connected components of the
+space of Fredholm operators. ind : Fred(X) -> Z is a continuous
+surjection onto Z, classifying connected components.
+-/
+
+theorem index_homotopy_invariant (X : Type u) [NormedAddCommGroup X] [CompleteSpace X]
+    (T0 T1 : FredholmOperator X X) (h : IsHomotopic T0 T1) :
+    FredholmIndex T0 = FredholmIndex T1 := by
+  -- Index is locally constant because small perturbations of T
+  -- don't change index (perturbation theory for semi-Fredholm)
+  -- Connectedness + local constancy => global constancy
+  sorry
+
+#eval "Atkinson + Index homotopy invariance"

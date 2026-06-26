@@ -65,3 +65,22 @@ theorem spectrumUnitaryInvariance {H K : HilbertSpace} (A : UnboundedOperator H)
   True
 
 #eval "Properties.Preservation: SelfAdjointPerturb, SemigroupGeneration, ClosedStability, EssentialSpectrum — loaded"
+
+/-! ## Perturbation Theory: Kato-Rellich Theorem
+
+If A is self-adjoint and B is symmetric with relative bound a < 1:
+||Bx|| <= a||Ax|| + b||x|| for all x in domain(A), then A+B
+is self-adjoint on domain(A).
+-/
+
+theorem kato_rellich (H : Type u) [HilbertSpace H]
+    (A : UnboundedSelfAdjointOperator H) (B : SymmetricOperator H)
+    (h_domain : domain A subset domain B) (a b : Real) (h_a : a < 1)
+    (h_bound : forall x in domain A, ||B x|| <= a * ||A x|| + b * ||x||) :
+    UnboundedSelfAdjointOperator H (A + B) (withDomain := domain A) := by
+  -- Show (A+B +/- i lambda I) is surjective for large lambda via Neumann series
+  -- ||B (A +/- i lambda)^{-1}|| <= a + b/|lambda| < 1 for |lambda| large enough
+  -- Then (A+B +/- i lambda) = (I + B(A+/-i lambda)^{-1})(A+/-i lambda) is surjective
+  sorry
+
+#eval "Kato-Rellich perturbation theorem"
